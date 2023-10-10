@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div onclick=checkLoginState class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="true"></div>    
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1401255610800691',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v18.0'
+        });
+        
+        FB.AppEvents.logPageView();   
+        
+    };
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                var accessToken = response.authResponse.accessToken;
+                console.log(accessToken)
+                // Access token obtained successfully
+                // Use accessToken for further API requests
+            } else {
+                console.log("fail")
+                // User is not logged in or has not authorized your app
+            }
+        });
+    }
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=1401255610800691&autoLogAppEvents=1" nonce="your-nonce"></script>
+
+</body>
+</html>
