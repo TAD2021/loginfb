@@ -18,13 +18,11 @@
         }
     }
 
-
     function checkLoginState() {               // Called when a person is finished with the Login Button.
         FB.getLoginStatus(function(response) {   // See the onlogin handler
             statusChangeCallback(response);
         });
     }
-
 
     window.fbAsyncInit = function() {
         FB.init({
@@ -48,6 +46,28 @@
                 'Thanks for logging in, ' + response.name + '!';
         });
     }
+    function logOut() {
+        FB.logout(function(response) {
+            // user is now logged out
+            document.getElementById('status').innerHTML =
+                'Thanks for logging in' + response;
+        });
+    }
+
+    /* make the API call */
+    FB.api(
+        "/me/likes",
+        function (response) {
+            if (response && !response.error) {
+                console.log(response);
+                var text='';
+                for (i = 0; i < response.data.length; i++) {
+                text +=response.data[i].created_time+'<br>'+response.data[i].name;
+            }
+            document.getElementById('status2').innerHTML =text;
+            }
+        }
+    );
 
 </script>
 
@@ -57,6 +77,8 @@
 </fb:login-button>
 
 <div id="status">
+</div>
+<div id="status2">
 </div>
 
 <!-- Load the JS SDK asynchronously -->
