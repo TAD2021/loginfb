@@ -50,24 +50,9 @@
         FB.logout(function(response) {
             // user is now logged out
             document.getElementById('status').innerHTML =
-                'Thanks for logging in' + response;
+                'Bye' + response;
         });
     }
-
-    /* make the API call */
-    FB.api(
-        "/me/likes",
-        function (response) {
-            if (response && !response.error) {
-                console.log(response);
-                var text='';
-                for (i = 0; i < response.data.length; i++) {
-                text +=response.data[i].created_time+'<br>'+response.data[i].name;
-            }
-            document.getElementById('status2').innerHTML =text;
-            }
-        }
-    );
 
 </script>
 
@@ -75,10 +60,9 @@
 
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 </fb:login-button>
+<button onclick="logOut()">Log out</button>
 
 <div id="status">
-</div>
-<div id="status2">
 </div>
 
 <!-- Load the JS SDK asynchronously -->
